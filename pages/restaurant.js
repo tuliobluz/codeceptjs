@@ -2,12 +2,10 @@ const { I } = inject();
 
 module.exports = {
 
-  // insert your locators and methods here
   popularItem: {css: "div[data-qa='popular-items-list']"},
   acceptChoices: {css: "button[data-qa='menu-item-choices-action-submit']"},
   checkoutButton: {css: "button[data-qa='sidebar-action-checkout']"},
   detailsPayment: {css: "div[data-qa='sidebar-overview-details-payment-element-panel']"},
-  payment: {css: "div[data-qa='payment-modal-cash-element-element-element']"},
   doneButton: {css: "button[data-qa='payment-modal-action-submit']"},
   submitOrderButton: {css: "button[data-qa='proceed-checkout-button-action-submit-order']"},
 
@@ -24,8 +22,8 @@ module.exports = {
     I.click(this.detailsPayment);
   },
 
-  selectPayment(){
-    I.click(this.payment);
+  selectPaymentRestaurant(payment){
+    I.click(`div[data-qa='payment-modal-${payment}']`);
   },
 
   acceptPayment(){

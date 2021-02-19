@@ -7,10 +7,10 @@ Scenario('Order successfully', ({ I, homePage, searchPage, restaurantPage, order
     restaurantPage.addPopularItem();
     restaurantPage.goToCheckout();
     orderPage.fillNameField('Take away name', 'take@away.com', '123456789');
-    orderPage.selectPayment();
+    orderPage.selectPaymentOrder('paypal');
     
     restaurantPage.openDetailsPayment();
-    restaurantPage.selectPayment();
+    restaurantPage.selectPaymentRestaurant('cash');
     restaurantPage.acceptPayment();
     restaurantPage.submitOrder();
 

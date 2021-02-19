@@ -1,9 +1,7 @@
 const { I } = inject();
 
 module.exports = {
-
-  // insert your locators and methods here
-  // setting locators
+  
   fields: {
     addressData: '#imysearchstring',
     addressDataName: 'a[data-name="Dłusko 12, 78-630 Dłusko"]'
