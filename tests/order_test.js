@@ -20,5 +20,4 @@ Scenario('Order successfully', ({ I, homePage, searchPage, restaurantPage, order
     I.seeElementInDOM(successPage.tipStep)
     I.seeElementInDOM(successPage.overview)
     I.seeElementInDOM(successPage.purchaseid)
-
 });

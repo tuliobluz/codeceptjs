@@ -13,7 +13,10 @@ exports.config = {
       show: true,
       windowSize: '1280x960',
       waitForNavigation: "networkidle0"
-    }
+    },
+    Mochawesome: {
+      uniqueScreenshotNames: "true"
+  }
   },
   include: {
     I: './steps_file.js',
@@ -24,7 +27,11 @@ exports.config = {
     successPage: './pages/success.js'
   },
   bootstrap: null,
-  mocha: {},
+  mocha: {
+    reporterOptions: {
+        reportDir: "output"
+    }
+  },
   name: 'takeaway',
   plugins: {
     pauseOnFail: {},
