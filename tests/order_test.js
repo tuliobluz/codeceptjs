@@ -1,6 +1,6 @@
 Feature('Order');
 
-Scenario('Order successfully', ({ I, homePage, searchPage, restaurantPage, orderPage  }) => {
+Scenario('Order successfully', ({ I, homePage, searchPage, restaurantPage, orderPage, successPage}) => {
     I.amOnPage('');
     homePage.fillAddress('Dłusko 12, 78-630 Dłusko');
     searchPage.clickRestaurant();
@@ -15,6 +15,10 @@ Scenario('Order successfully', ({ I, homePage, searchPage, restaurantPage, order
     restaurantPage.submitOrder();
 
     I.seeInCurrentUrl('/foodtracker?trackingid=');
-    I.seeElementInDOM('.css-drhbsp-Map')
+    I.seeElementInDOM(successPage.mapElement)
+    I.see('TEST Restaurant Selenium')
+    I.seeElementInDOM(successPage.tipStep)
+    I.seeElementInDOM(successPage.overview)
+    I.seeElementInDOM(successPage.purchaseid)
 
 });
