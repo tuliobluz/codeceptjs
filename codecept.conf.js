@@ -16,7 +16,12 @@ exports.config = {
     }
   },
   include: {
-    I: './steps_file.js'
+    I: './steps_file.js',
+    searchPage: './pages/search.js',
+    restaurantPage: './pages/restaurant.js',
+    orderPage: './pages/order.js',
+    homePage: './pages/home.js',
+    successPage: './pages/success.js'
   },
   bootstrap: null,
   mocha: {},
