@@ -11,4 +11,8 @@ module.exports = {
     I.fillField(this.fields.addressData, address);
     I.click(this.fields.addressDataName);
   },
+
+  clickSearch(){
+    I.click('#submit_deliveryarea')
+  }
 }

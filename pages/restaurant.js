@@ -8,10 +8,31 @@ module.exports = {
   detailsPayment: {css: "div[data-qa='sidebar-overview-details-payment-element-panel']"},
   doneButton: {css: "button[data-qa='payment-modal-action-submit']"},
   submitOrderButton: {css: "button[data-qa='proceed-checkout-button-action-submit-order']"},
+  increaseAmountButton: {css: "span[data-qa='cart-item-amount-action-increment']"},
+  commentButton: {css: "span[data-qa='cart-item-action-add-comment']"},
+  commentField: {css:"div[data-qa='cart-item-comment-textarea']"},
+  addCommentButton: {css: "span[data-qa='cart-item-comment-action-add']"},
 
-  addPopularItem(){
+  addPopularMeal(){
     I.click(this.popularItem);
     I.click(this.acceptChoices);
+  },
+
+  openComment(){
+    I.click(this.commentButton);
+  },
+
+  addComment(text){
+    I.waitForElement(this.commentField)
+    I.fillField(this.commentField, text);
+    I.click(this.addCommentButton)
+  },
+
+  addMealToCart(text, accept){
+    I.click(`//h3[contains(text(),'${text}')]`);
+    if(accept){
+      I.click(this.acceptChoices);
+    }
   },
 
   goToCheckout(){
@@ -32,5 +53,9 @@ module.exports = {
 
   submitOrder(){
     I.click(this.submitOrderButton);
-  }
+  },
+
+  increaseAmount(){
+    I.click(this.increaseAmountButton);
+  },
 }

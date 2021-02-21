@@ -29,7 +29,7 @@ exports.config = {
   bootstrap: null,
   mocha: {
     reporterOptions: {
-        reportDir: "output"
+        reportDir: "./reports/output"
     }
   },
   name: 'takeaway',
@@ -44,5 +44,9 @@ exports.config = {
     screenshotOnFail: {
       enabled: true
     }
+  },
+  rerun: {
+    minSuccess: 1,
+    maxReruns: 4,
   }
 }
