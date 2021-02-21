@@ -6,4 +6,9 @@ module.exports = {
   tipStep: {css: '.tipping.js-tipping-step5'},
   overview: {css: '.orderoverview__content'},
   purchaseid: {css: '.order-purchaseid'},
+
+  checkElementTipVisible(){
+    I.seeElement(this.tipStep);
+  }
+
 }

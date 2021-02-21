@@ -14,5 +14,6 @@ module.exports = {
 
   clickSearch(){
     I.click('#submit_deliveryarea')
+    
   }
 }

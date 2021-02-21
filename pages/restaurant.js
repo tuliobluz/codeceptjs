@@ -1,7 +1,6 @@
 const { I } = inject();
 
 module.exports = {
-
   popularItem: {css: "div[data-qa='popular-items-list']"},
   acceptChoices: {css: "button[data-qa='menu-item-choices-action-submit']"},
   checkoutButton: {css: "button[data-qa='sidebar-action-checkout']"},
