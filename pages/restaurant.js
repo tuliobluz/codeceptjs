@@ -1,16 +1,16 @@
 const { I } = inject();
 
 module.exports = {
-  popularItem: {css: "div[data-qa='popular-items-list']"},
-  acceptChoices: {css: "button[data-qa='menu-item-choices-action-submit']"},
-  checkoutButton: {css: "button[data-qa='sidebar-action-checkout']"},
-  detailsPayment: {css: "div[data-qa='sidebar-overview-details-payment-element-panel']"},
-  doneButton: {css: "button[data-qa='payment-modal-action-submit']"},
-  submitOrderButton: {css: "button[data-qa='proceed-checkout-button-action-submit-order']"},
-  increaseAmountButton: {css: "span[data-qa='cart-item-amount-action-increment']"},
-  commentButton: {css: "span[data-qa='cart-item-action-add-comment']"},
-  commentField: {css:"div[data-qa='cart-item-comment-textarea']"},
-  addCommentButton: {css: "span[data-qa='cart-item-comment-action-add']"},
+  popularItem:'$popular-items-list',
+  acceptChoices: '$menu-item-choices-action-submit',
+  checkoutButton: '$sidebar-action-checkout',
+  detailsPayment: '$sidebar-overview-details-payment-element-panel',
+  doneButton: '$payment-modal-action-submit',
+  submitOrderButton: '$proceed-checkout-button-action-submit-order',
+  increaseAmountButton: '$cart-item-amount-action-increment',
+  commentButton: '$cart-item-action-add-comment',
+  commentField: '$cart-item-comment-textarea',
+  addCommentButton: '$cart-item-comment-action-add',
 
   addPopularMeal(){
     I.click(this.popularItem);
@@ -50,11 +50,19 @@ module.exports = {
     I.click(this.doneButton);
   },
 
-  submitOrder(){
+  submitOrderRestaurant(){
     I.click(this.submitOrderButton);
   },
 
   increaseAmount(){
     I.click(this.increaseAmountButton);
   },
+
+  checkNotReachingMessage(){
+    I.seeElement("div[data-qa='cart-mov-message-not-reached']")
+  },
+
+  checkNotVisibleNotReachingMessage(){
+    I.dontSee("div[data-qa='cart-mov-message-not-reached']")
+  }
 }

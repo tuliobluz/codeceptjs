@@ -2,21 +2,18 @@ const { I } = inject();
 
 class Payment {
   constructor() {
-    this.changePaymentCss = {css: "div[data-qa='multi-step-checkout-details-payment-element']"},
-    this.doneButtonCss = {css: "button[data-qa='payment-modal-action-submit']"},
-    this.submitOrderButtonCss = {css: "button[data-qa='multi-step-checkout-action-submit-order']"},
+    this.changePayment = '$multi-step-checkout-details-payment-element',
+    this.doneButton = '$payment-modal-action-submit',
     this.cancelPaypalCss = {css: "#login .cancelUrl"}
   }
 
-  selectPaymentOrder(payment){
-    I.click(this.changePaymentCss);
+  selectPayment(payment){
+    I.click(this.changePayment);
     I.click(`div[data-qa='payment-modal-${payment}']`);
-    I.click(this.doneButtonCss);
-    I.click(this.submitOrderButtonCss);
+    I.click(this.doneButton);
   };
 
   cancelPaypalPayment(){
-    I.waitForNavigation();
     I.click(this.cancelPaypalCss);
     I.waitForNavigation();
   };

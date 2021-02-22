@@ -43,6 +43,10 @@ exports.config = {
     },
     screenshotOnFail: {
       enabled: true
+    },
+    customLocator: {
+      enabled: true,
+      attribute: 'data-qa'
     }
   },
   rerun: {

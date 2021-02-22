@@ -1,14 +1,29 @@
 const { I } = inject();
 
 module.exports = {
-  
-  mapElement: {css: '.css-drhbsp-Map'},
-  tipStep: {css: '.tipping.js-tipping-step5'},
-  overview: {css: '.orderoverview__content'},
-  purchaseid: {css: '.order-purchaseid'},
+
+  mapElementCss: {css: '.css-drhbsp-Map'},
+  tipStepCss: {css: '.tipping.js-tipping-step5'},
+  overviewCss: {css: '.orderoverview__content'},
+  purchaseIdCss: {css: '.order-purchaseid'},
 
   checkElementTipVisible(){
-    I.seeElement(this.tipStep);
-  }
+    I.seeElement(this.tipStepCss);
+  },
 
+  checkUrlTracking(){
+    I.seeInCurrentUrl('/foodtracker?trackingid=');
+  },
+
+  checkElementMap(){
+    I.seeElement(this.mapElementCss); 
+  },
+
+  checkOverview(){
+    I.seeElement(this.overviewCss)
+  },
+
+  checkPurschaseId(){
+    I.seeElement(successPage.purchaseIdCss)
+  }
 }

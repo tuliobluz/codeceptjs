@@ -1,67 +1,68 @@
 const constant = require("../helpers/constant");
-//const Order = require("../pages/order");
 Feature('Order');
 
-Scenario('Order successfully', ({ I, homePage, orderPage, searchPage, restaurantPage, successPage}) => {
-    I.amOnPage('');
+Scenario('Order successfully', ({homePage, orderPage, searchPage, restaurantPage, successPage}) => {
+    homePage.goToHomePage();
     homePage.fillAddress(constant.variables.ADDRESS);
+
     searchPage.clickRestaurant();
+
     restaurantPage.addPopularMeal();
     restaurantPage.openComment();
     restaurantPage.addComment('no sugar');
     restaurantPage.addMealToCart(constant.variables.FIRST_MEAL, 'accept');
     restaurantPage.addMealToCart(constant.variables.SECOND_MEAL, 'accept');
     restaurantPage.goToCheckout();
-    orderPage.fillNameField(constant.variables.USER);
-    orderPage.selectPaymentOrder(constant.variables.PAYMENT_PAYPAL);
+
+    orderPage.fillRequiredUserFields(constant.variables.USER);
+    orderPage.selectPayment(constant.variables.PAYMENT_PAYPAL);
+    orderPage.submitOrder();
     orderPage.cancelPaypalPayment();
         
     restaurantPage.openDetailsPayment();
     restaurantPage.selectPaymentRestaurant(constant.variables.PAYMENT_CASH);
     restaurantPage.acceptPayment();
-    restaurantPage.submitOrder();
+    restaurantPage.submitOrderRestaurant();
 
-    I.seeInCurrentUrl('/foodtracker?trackingid=');
-    I.seeElement(successPage.mapElement)
-    I.see('TEST Restaurant Selenium')
-    successPage.checkElementTipVisible()
-    //I.seeElement(successPage.tipStep)
-    I.seeElement(successPage.overview)
-    I.seeElement(successPage.purchaseid)
+    successPage.checkUrlTracking();
+    successPage.checkElementTipVisible();
+    successPage.checkElementMap();
+    successPage.checkOverview();
+    successPage.checkPurschaseId();
 });
 
-Scenario.skip('Not reaching the minimun value', ({ I, homePage, searchPage, restaurantPage, }) => {
-    I.amOnPage('');
+Scenario('Not reaching the minimun value', ({homePage, searchPage, restaurantPage}) => {
+    homePage.goToHomePage();
     homePage.fillAddress(constant.variables.ADDRESS);
     searchPage.clickRestaurant();
     restaurantPage.addMealToCart(constant.variables.NOT_REACHABLE_MEAL);
-    I.seeElement("div[data-qa='cart-mov-message-not-reached']")
+    restaurantPage.checkNotReachingMessage();
 });
 
-Scenario('Increase the amount in the basket', ({ I, homePage, searchPage, restaurantPage, orderPage, successPage}) => {
-    I.amOnPage('');
+Scenario('Increase the amount in the basket', ({homePage, searchPage, restaurantPage}) => {
+    homePage.goToHomePage();
     homePage.fillAddress('Dłusko 12, 78-630 Dłusko');
     searchPage.clickRestaurant();
     restaurantPage.addMealToCart(constant.variables.NOT_REACHABLE_MEAL);
-    I.seeElement("div[data-qa='cart-mov-message-not-reached']")
+    restaurantPage.checkNotReachingMessage();
     restaurantPage.increaseAmount();
-    I.dontSee("div[data-qa='cart-mov-message-not-reached']")
+    restaurantPage.checkNotVisibleNotReachingMessage();
 });
 
 Scenario.skip('Order Required fields', ({ I, homePage, searchPage, restaurantPage, orderPage, successPage}) => {
-    I.amOnPage('');
+    homePage.goToHomePage();
     homePage.fillAddress('Dłusko 12, 78-630 Dłusko');
     searchPage.clickRestaurant();
-    restaurantPage.addMealToCart('Meal One', 'accept');
-    restaurantPage.addMealToCart('Meal Two', 'accept');
+    restaurantPage.addMealToCart(constant.variables.NOT_REACHABLE_MEAL, 'accept');
+    restaurantPage.addMealToCart(constant.variables.NOT_REACHABLE_MEAL, 'accept');
     restaurantPage.goToCheckout();
     orderPage.submitOrder();
 
     I.seeElement("div[data-qa='cart-mov-message-not-reached']")
 });
 
-Scenario.skip('Required address', ({ I, homePage, searchPage, restaurantPage, orderPage, successPage}) => {
-    I.amOnPage('');
+Scenario.skip('Required address', ({ I, homePage}) => {
+    homePage.goToHomePage();
     I.seeElement("#ideliveryareaerror:none");
 
     homePage.clickSearch();
