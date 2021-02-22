@@ -32,7 +32,6 @@ exports.config = {
   },
   name: 'takeaway',
   plugins: {
-    pauseOnFail: {},
     retryFailedStep: {
       enabled: true
     },

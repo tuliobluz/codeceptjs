@@ -44,3 +44,4 @@ Select config file manually (-c or --config option) ```npx codeceptjs run -c cod
 
 Running to generate the Report ```npx codeceptjs run --reporter mochawesome```
     The report HTML it will saved to ```\reports\output\mochawesome.html```
+    
