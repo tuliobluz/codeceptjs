@@ -23,6 +23,12 @@
 
 * ```codecept.conf.js``` default one
 * ```codecept.ci.conf.js``` for CI
+    * The config CI can receive environment variables like browser, window size, base Url, set headless as true to run in Headless mode.
+    Environment variables:
+        * BROWSER
+        * BASE_URL
+        * WINDOWS_SIZE
+        * HEADLESS
 
 ## Running the test
 
@@ -30,7 +36,7 @@ Run all tests from current dir ```npx codeceptjs run```
 
 Run only tests with "order" word in name ```npx codeceptjs run --grep "Order"```
 
-Run single test [path to codecept.js] [test filename] ```npx codeceptjs run github_test.js```
+Run single test [path to codecept.js] [test filename] ```npx codeceptjs run order_test.js```
 
 Select config file manually (-c or --config option) ```npx codeceptjs run -c codecept.ci.conf.js```
 
