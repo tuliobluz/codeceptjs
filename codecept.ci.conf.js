@@ -9,12 +9,22 @@ exports.config = {
   output: './reports/output',
   helpers: {
     Puppeteer: {
-      url: 'https://www.pyszne.pl/',
-      show: true,
-      windowSize: '1280x960',
-      waitForNavigation: "networkidle0"
+      browser: process.env.BROWSER || 'chrome',
+      url: process.env.BASE_URL || 'https://www.pyszne.pl/',
+      windowSize: process.env.WINDOWS_SIZE || '1280x960',
+      waitForNavigation: "networkidle0",
+      chrome: {
+          args: [
+              '--ignore-certificate-errors',
+          ],
+      },
+      firefox: {
+          args: [
+              '--ignore-certificate-errors'
+          ],
+      },
     },
-    
+
     Mochawesome: {
       uniqueScreenshotNames: "true",
       reportFileName: 'reportUI'
@@ -26,7 +36,7 @@ exports.config = {
     restaurantPage: './pages/restaurant.js',
     orderPage: './pages/order.js',
     homePage: './pages/home.js',
-    successPage: './pages/success.js',
+    successPage: './pages/success.js'
   },
   bootstrap: null,
   mocha: {

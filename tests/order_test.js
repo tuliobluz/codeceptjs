@@ -1,28 +1,28 @@
 const assert = require('assert');
+const testData = require('../config/testData.js');
 
-const constant = require("../helpers/constant");
 Feature('Order');
 
 Scenario('Order successfully', ({homePage, orderPage, searchPage, restaurantPage, successPage}) => {
     homePage.goToHomePage();
-    homePage.fillAddress(constant.variables.ADDRESS);
+    homePage.fillAddress(testData.variables.ADDRESS);
 
     searchPage.clickRestaurant();
 
     restaurantPage.addPopularMeal();
     restaurantPage.openComment();
     restaurantPage.addComment('no sugar');
-    restaurantPage.addMealToCart(constant.variables.FIRST_MEAL, 'accept');
-    restaurantPage.addMealToCart(constant.variables.SECOND_MEAL, 'accept');
+    restaurantPage.addMealToCart(testData.variables.FIRST_MEAL, 'accept');
+    restaurantPage.addMealToCart(testData.variables.SECOND_MEAL, 'accept');
     restaurantPage.goToCheckout();
 
-    orderPage.fillRequiredUserFields(constant.variables.USER);
-    orderPage.selectPayment(constant.variables.PAYMENT_PAYPAL);
+    orderPage.fillRequiredUserFields(testData.variables.USER);
+    orderPage.selectPayment(testData.variables.PAYMENT_PAYPAL);
     orderPage.submitOrderNavigation();
     orderPage.cancelPaypalPayment();
         
     restaurantPage.openDetailsPayment();
-    restaurantPage.selectPaymentRestaurant(constant.variables.PAYMENT_CASH);
+    restaurantPage.selectPaymentRestaurant(testData.variables.PAYMENT_CASH);
     restaurantPage.acceptPayment();
     restaurantPage.submitOrderRestaurant();
 
@@ -35,17 +35,17 @@ Scenario('Order successfully', ({homePage, orderPage, searchPage, restaurantPage
 
 Scenario('Not reaching the minimun value', ({homePage, searchPage, restaurantPage}) => {
     homePage.goToHomePage();
-    homePage.fillAddress(constant.variables.ADDRESS);
+    homePage.fillAddress(testData.variables.ADDRESS);
     searchPage.clickRestaurant();
-    restaurantPage.addMealToCart(constant.variables.NOT_REACHABLE_MEAL);
+    restaurantPage.addMealToCart(testData.variables.NOT_REACHABLE_MEAL);
     restaurantPage.checkNotReachingMessage();
 });
 
 Scenario('Increase the amount in the basket', async ({homePage, searchPage, restaurantPage}) => {
     homePage.goToHomePage();
-    homePage.fillAddress(constant.variables.ADDRESS);
+    homePage.fillAddress(testData.variables.ADDRESS);
     searchPage.clickRestaurant();
-    restaurantPage.addMealToCart(constant.variables.NOT_REACHABLE_MEAL);
+    restaurantPage.addMealToCart(testData.variables.NOT_REACHABLE_MEAL);
     restaurantPage.checkNotReachingMessage();
     restaurantPage.increaseAmount();
     
@@ -56,21 +56,21 @@ Scenario('Increase the amount in the basket', async ({homePage, searchPage, rest
 
 Scenario('Decrease the amount in the basket', ({homePage, searchPage, restaurantPage}) => {
     homePage.goToHomePage();
-    homePage.fillAddress(constant.variables.ADDRESS);
+    homePage.fillAddress(testData.variables.ADDRESS);
     searchPage.clickRestaurant();
-    restaurantPage.addMealToCart(constant.variables.NOT_REACHABLE_MEAL);
+    restaurantPage.addMealToCart(testData.variables.NOT_REACHABLE_MEAL);
     restaurantPage.decreaseAmount();
     restaurantPage.checkEmptyCart();
 });
 
 Scenario('Order Required fields', ({homePage, searchPage, restaurantPage, orderPage}) => {
     homePage.goToHomePage();
-    homePage.fillAddress(constant.variables.ADDRESS);
+    homePage.fillAddress(testData.variables.ADDRESS);
 
     searchPage.clickRestaurant();
 
-    restaurantPage.addMealToCart(constant.variables.FIRST_MEAL, 'accept');
-    restaurantPage.addMealToCart(constant.variables.SECOND_MEAL, 'accept');
+    restaurantPage.addMealToCart(testData.variables.FIRST_MEAL, 'accept');
+    restaurantPage.addMealToCart(testData.variables.SECOND_MEAL, 'accept');
     restaurantPage.goToCheckout();
     orderPage.submitOrder();
 

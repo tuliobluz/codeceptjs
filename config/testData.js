@@ -1,5 +1,4 @@
-module.exports = 
-{
+module.exports = {
     variables:{
         "ADDRESS": "Dłusko 12, 78-630 Dłusko",
         "FIRST_MEAL": "Meal One",
