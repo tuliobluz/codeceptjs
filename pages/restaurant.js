@@ -8,9 +8,13 @@ module.exports = {
   doneButton: '$payment-modal-action-submit',
   submitOrderButton: '$proceed-checkout-button-action-submit-order',
   increaseAmountButton: '$cart-item-amount-action-increment',
+  decreaseAmountButton: '$cart-item-amount-action-decrement',
+  emptyCart: '$sidebar-empty-heading',
+  reachValueMsg: '$cart-mov-message-not-reached',
   commentButton: '$cart-item-action-add-comment',
   commentField: '$cart-item-comment-textarea',
   addCommentButton: '$cart-item-comment-action-add',
+  cartQuatity: '$cart-item-quantity',
 
   addPopularMeal(){
     I.click(this.popularItem);
@@ -58,11 +62,23 @@ module.exports = {
     I.click(this.increaseAmountButton);
   },
 
+  decreaseAmount(){
+    I.click(this.decreaseAmountButton);
+  },
+
   checkNotReachingMessage(){
-    I.seeElement("div[data-qa='cart-mov-message-not-reached']")
+    I.seeElement(this.reachValueMsg)
   },
 
   checkNotVisibleNotReachingMessage(){
-    I.dontSee("div[data-qa='cart-mov-message-not-reached']")
+    I.dontSee(this.reachValueMsg)
+  },
+
+  checkEmptyCart(){
+    I.seeElement(this.emptyCart)
+  },
+
+  async checkQuantity(){
+    return await I.grabTextFrom(this.cartQuatity);
   }
 }

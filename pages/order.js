@@ -7,6 +7,9 @@ class Order extends Payment{
     this.emailId = '#input_5';
     this.phoneNumberId = '#input_6',
     this.submitOrderButton = '$multi-step-checkout-action-submit-order'
+    this.nameRequiredMsg = '$shipping-info-forms-personal-details-input-name-message-error'
+    this.emailRequiredMsg = '$shipping-info-forms-personal-details-input-email-message-error'
+    this.phoneRequiredMsg = '$shipping-info-forms-personal-details-input-phone-message-error'
   };
 
   fillRequiredUserFields(user) {
@@ -15,9 +18,25 @@ class Order extends Payment{
     I.fillField(this.phoneNumberId, user.PHONE);
   };
 
-  submitOrder() {
+  submitOrderNavigation() {
     I.click(this.submitOrderButton);
     I.waitForNavigation();
+  };
+
+  submitOrder() {
+    I.click(this.submitOrderButton);
+  };
+
+  checkNameRequiredField(){
+    I.seeElement(this.nameRequiredMsg)
+  };
+
+  checkEmailRequiredField(){
+    I.seeElement(this.emailRequiredMsg)
+  };
+
+  checkPhoneRequiredField(){
+    I.seeElement(this.phoneRequiredMsg)
   };
 }
 

@@ -1,3 +1,5 @@
+const assert = require('assert');
+
 const constant = require("../helpers/constant");
 Feature('Order');
 
@@ -16,7 +18,7 @@ Scenario('Order successfully', ({homePage, orderPage, searchPage, restaurantPage
 
     orderPage.fillRequiredUserFields(constant.variables.USER);
     orderPage.selectPayment(constant.variables.PAYMENT_PAYPAL);
-    orderPage.submitOrder();
+    orderPage.submitOrderNavigation();
     orderPage.cancelPaypalPayment();
         
     restaurantPage.openDetailsPayment();
@@ -39,33 +41,47 @@ Scenario('Not reaching the minimun value', ({homePage, searchPage, restaurantPag
     restaurantPage.checkNotReachingMessage();
 });
 
-Scenario('Increase the amount in the basket', ({homePage, searchPage, restaurantPage}) => {
+Scenario('Increase the amount in the basket', async ({homePage, searchPage, restaurantPage}) => {
     homePage.goToHomePage();
-    homePage.fillAddress('Dłusko 12, 78-630 Dłusko');
+    homePage.fillAddress(constant.variables.ADDRESS);
     searchPage.clickRestaurant();
     restaurantPage.addMealToCart(constant.variables.NOT_REACHABLE_MEAL);
     restaurantPage.checkNotReachingMessage();
     restaurantPage.increaseAmount();
+    
+    const quantity = await restaurantPage.checkQuantity();
+    assert.equal(quantity, 2);
     restaurantPage.checkNotVisibleNotReachingMessage();
 });
 
-Scenario.skip('Order Required fields', ({ I, homePage, searchPage, restaurantPage, orderPage, successPage}) => {
+Scenario('Decrease the amount in the basket', ({homePage, searchPage, restaurantPage}) => {
     homePage.goToHomePage();
-    homePage.fillAddress('Dłusko 12, 78-630 Dłusko');
+    homePage.fillAddress(constant.variables.ADDRESS);
     searchPage.clickRestaurant();
-    restaurantPage.addMealToCart(constant.variables.NOT_REACHABLE_MEAL, 'accept');
-    restaurantPage.addMealToCart(constant.variables.NOT_REACHABLE_MEAL, 'accept');
+    restaurantPage.addMealToCart(constant.variables.NOT_REACHABLE_MEAL);
+    restaurantPage.decreaseAmount();
+    restaurantPage.checkEmptyCart();
+});
+
+Scenario('Order Required fields', ({homePage, searchPage, restaurantPage, orderPage}) => {
+    homePage.goToHomePage();
+    homePage.fillAddress(constant.variables.ADDRESS);
+
+    searchPage.clickRestaurant();
+
+    restaurantPage.addMealToCart(constant.variables.FIRST_MEAL, 'accept');
+    restaurantPage.addMealToCart(constant.variables.SECOND_MEAL, 'accept');
     restaurantPage.goToCheckout();
     orderPage.submitOrder();
 
-    I.seeElement("div[data-qa='cart-mov-message-not-reached']")
+    orderPage.checkNameRequiredField();
+    orderPage.checkEmailRequiredField();
+    orderPage.checkPhoneRequiredField();
 });
 
-Scenario.skip('Required address', ({ I, homePage}) => {
+Scenario('Required address', ({homePage}) => {
     homePage.goToHomePage();
-    I.seeElement("#ideliveryareaerror:none");
-
+    homePage.checkNotVisibleAddressRequiredMsg();
     homePage.clickSearch();
-
-    I.seeElement("#ideliveryareaerror *([style*='display: block']");
+    homePage.checkAddressRequireMsg();
 });
