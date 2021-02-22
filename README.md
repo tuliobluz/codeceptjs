@@ -14,7 +14,7 @@
 
 ## Folders Structures
 
-* ```helpers``` Helpers and utils in general should be place here
+* ```config``` Configuration file to help the test as data
 * ```pages``` Where the page object of tests should be created
 * ```reports``` Where the report and screenshots are located
 * ```tests``` Where the specification of tests should be created
